@@ -1,0 +1,47 @@
+batch_size: 32
+data: pxrd_unique_10_60_1256_remove_duplicate.pt
+decay_epochs: 90
+decay_rate: 0.1
+depths:
+- 1
+- 1
+- 3
+- 3
+drop: 0.7
+drop_path: 0.7
+embed_dims:
+- 96
+- 192
+- 384
+- 768
+epochs: 300
+eval_metric: loss
+in_chans: 1
+layer_decay: null
+load_epoch: ''
+local_rank: 0
+lr: 0.001
+model:
+momentum: 0.9
+num_classes: 1256
+num_heads:
+- 3
+- 6
+- 12
+- 24
+opt: adam
+opt_kwargs: {}
+sched: cosine
+seed: 42
+warmup_epochs: 10
+warmup_lr: 1.0e-04
+weight_decay: 1.0e-04
+window_size: 70
+work_dir: ''
+workers: 1
+drop_block: False
+block_size: 100
+stop_early: False
+drop_in_mlp: False
+drop_peaks: True
+drop_threshold: 10
