@@ -1,0 +1,41 @@
+2025-09-23 10:51:22,628 - Admin - INFO - ===========STARTING TOP 0 PREDICTION===========
+2025-09-23 10:51:26,690 - Admin - INFO - Starting As2CdO6
+2025-09-23 10:51:32,916 - Admin - INFO - Finish As2CdO6 geometry optimization in 19 steps with minimized force 0.000063
+2025-09-23 10:51:32,917 - Admin - INFO - Starting AsCd2O6
+2025-09-23 10:51:34,555 - Admin - INFO - Finish AsCd2O6 geometry optimization in 22 steps with minimized force 0.000148
+2025-09-23 10:51:34,557 - Admin - INFO - Starting As6CdO2
+2025-09-23 10:51:37,123 - Admin - INFO - Finish As6CdO2 geometry optimization in 35 steps with minimized force 0.000122
+2025-09-23 10:51:37,126 - Admin - INFO - Starting AsCd6O2
+2025-09-23 10:51:39,279 - Admin - INFO - Finish AsCd6O2 geometry optimization in 29 steps with minimized force 0.000055
+2025-09-23 10:51:39,281 - Admin - INFO - Starting As6Cd2O
+2025-09-23 10:51:42,048 - Admin - INFO - Finish As6Cd2O geometry optimization in 38 steps with minimized force 0.000526
+2025-09-23 10:51:42,050 - Admin - INFO - Starting As2Cd6O
+2025-09-23 10:51:44,350 - Admin - INFO - Finish As2Cd6O geometry optimization in 33 steps with minimized force 0.000250
+2025-09-23 10:51:44,352 - Admin - INFO - ===========STARTING TOP 1 PREDICTION===========
+2025-09-23 10:51:47,644 - Admin - INFO - ===========STARTING TOP 2 PREDICTION===========
+2025-09-23 10:51:48,098 - Admin - INFO - Starting As12Cd2O4
+2025-09-23 10:51:54,077 - Admin - INFO - Finish As12Cd2O4 geometry optimization in 80 steps with minimized force 0.001031
+2025-09-23 10:51:54,079 - Admin - INFO - Starting As4Cd2O12
+2025-09-23 10:51:59,168 - Admin - INFO - Finish As4Cd2O12 geometry optimization in 66 steps with minimized force 0.001054
+2025-09-23 10:51:59,170 - Admin - INFO - Starting As12Cd4O2
+2025-09-23 10:52:03,034 - Admin - INFO - Finish As12Cd4O2 geometry optimization in 51 steps with minimized force 0.000756
+2025-09-23 10:52:03,036 - Admin - INFO - Starting As2Cd4O12
+2025-09-23 10:52:07,525 - Admin - INFO - Finish As2Cd4O12 geometry optimization in 59 steps with minimized force 0.000525
+2025-09-23 10:52:07,527 - Admin - INFO - Starting As2Cd12O4
+2025-09-23 10:52:10,118 - Admin - INFO - Finish As2Cd12O4 geometry optimization in 34 steps with minimized force 0.000184
+2025-09-23 10:52:10,120 - Admin - INFO - Starting As4Cd12O2
+2025-09-23 10:52:13,280 - Admin - INFO - Finish As4Cd12O2 geometry optimization in 41 steps with minimized force 0.000298
+2025-09-23 10:52:15,116 - Admin - INFO - Structure index: 0, formula: Cd1As2O6, DTW score: 134.1680291823139
+2025-09-23 10:52:15,602 - Admin - INFO - Structure index: 1, formula: Cd2As1O6, DTW score: 271.1498999318582
+2025-09-23 10:52:16,101 - Admin - INFO - Structure index: 2, formula: Cd1As6O2, DTW score: 375.52701413250867
+2025-09-23 10:52:16,609 - Admin - INFO - Structure index: 3, formula: Cd6As1O2, DTW score: 459.11117790375766
+2025-09-23 10:52:17,119 - Admin - INFO - Structure index: 4, formula: Cd2As6O1, DTW score: 449.9443752672227
+2025-09-23 10:52:17,631 - Admin - INFO - Structure index: 5, formula: Cd6As2O1, DTW score: 454.5156417694956
+2025-09-23 10:52:18,225 - Admin - INFO - Structure index: 6, formula: Cd4As12O2, DTW score: 594.946565789201
+2025-09-23 10:52:18,754 - Admin - INFO - Structure index: 7, formula: Cd4As2O12, DTW score: 441.8035030891126
+2025-09-23 10:52:19,307 - Admin - INFO - Structure index: 8, formula: Cd12As2O4, DTW score: 417.1979538956413
+2025-09-23 10:52:19,883 - Admin - INFO - Structure index: 9, formula: Cd12As4O2, DTW score: 462.67485654850606
+2025-09-23 10:52:20,080 - Admin - INFO - ==============GROUND TRUTH SUMMARY==============
+2025-09-23 10:52:20,082 - Admin - INFO - The 1st similar structure index according DTW is 0,  score is 134.1680291823139
+2025-09-23 10:52:20,083 - Admin - INFO - The 2nd similar structure index according DTW is 1,  score is 271.1498999318582
+2025-09-23 10:52:20,085 - Admin - INFO - The 3rd similar structure index according DTW is 2,  score is 375.52701413250867
