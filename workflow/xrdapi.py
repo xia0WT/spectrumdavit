@@ -17,10 +17,10 @@ from tslearn.metrics import dtw_path
 from pybaselines import Baseline
 
 from nwtk import lortzen
-from utils import read_txt_xrd
-from model.spectrumdavit_model import SpectrumDaVit
-from find_peak import FindPeaks
-from structure_generator import MaceGenerator
+from .utils import read_txt_xrd
+from .model.spectrumdavit_model import SpectrumDaVit
+from .find_peak import FindPeaks
+from .structure_generator import MaceGenerator
 from nwtk.utils import create_log
 
 
@@ -28,8 +28,8 @@ class XrdPredict(object):
     def __init__(self,
                  model_config, #"../xrd_predict_unique/20250723_162449_SpectrumDaVit/args_config.yaml",  #yaml
                  model_save_dir, #"../xrd_predict_unique/20250723_162449_SpectrumDaVit/model_best.pth.tar",  #pth.tar,
-                 xrd_type_file = "../template/pxrd_unique_10_60_1256_remove_duplicate_label.pkl",
-                 structure_frame = "../template/structure_frame_unique_10_60_1256_remove_duplicate_fingerprint.pkl",
+                 xrd_type_file = "template/pxrd_unique_10_60_1256_remove_duplicate_label.pkl",
+                 structure_frame = "template/structure_frame_unique_10_60_1256_remove_duplicate_fingerprint.pkl",
                  mace_model_paths = "../data/mace-omat-0-medium.model",
                  local_rank = 2,
                  predict_topk = 3,
@@ -91,7 +91,7 @@ class XrdPredict(object):
                    **kwargs): # make sure to match as much peaks as you can, do not match error peaks.
 
         if not os.path.exists(work_dir):
-            os.mkdir(work_dir)
+            os.makedirs(work_dir)
         self.work_dir = work_dir
 
         self._logger = create_log(os.path.join(work_dir, 'result.log'))()
@@ -140,7 +140,7 @@ class XrdPredict(object):
         for i,j in zip(dtwsc[:3],("1st", "2nd", "3rd")):
             self._logger.info(f"The {j} similar structure index according DTW is {i[0]},  score is {i[1]}")
 
-        
+    @torch.no_grad()
     def _predict(self, peaks, model, top_k):
         profiled_xrd = self.profile.pseudo_voigt(*self.peak)
         pr = torch.tensor(profiled_xrd.squeeze()[np.newaxis, np.newaxis], dtype = torch.float32).to(self.device)

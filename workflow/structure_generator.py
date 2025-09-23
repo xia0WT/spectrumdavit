@@ -3,7 +3,9 @@ import re
 from pyxtal import pyxtal
 from pyxtal.lattice import Lattice
 from pymatgen.core import Structure
-from mace_opt import MaceOpt
+
+from .mace_opt import MaceOpt
+
 from itertools import permutations
 
 import numpy as np
