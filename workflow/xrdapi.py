@@ -108,7 +108,7 @@ class XrdPredict(object):
 
         self.peak = FindPeaks(*self.xrd_data).find_peak(prominence=prominence, **kwargs)
         #TODO x,y?
-        self.sgdector = SGDetector(x, y, window_length=window_length, poly_order = poly_order, deriv = deriv) if use_sgd else None
+        self.sgdector = SGDetector(*self.xrd_data, window_length=window_length, poly_order = poly_order, deriv = deriv) if use_sgd else None #TODO
         self.dtwdetector = DTWdetector(*raw_xrd, poly_order = poly_order) if use_dtw else None
         self.sgd_score = []
         self.dtw_score = []

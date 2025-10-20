@@ -250,9 +250,9 @@ class ClassifierHead(nn.Module):
             self.global_pool, self.fc = create_classifier(
                 self.in_features,
                 num_classes,
-                pool_type=pool_type,
+                #pool_type=pool_type, #TODO
                 use_conv=self.use_conv,
-                input_fmt=self.input_fmt,
+                #input_fmt=self.input_fmt, #TODO
             )
             self.flatten = nn.Flatten(1) if self.use_conv and pool_type else nn.Identity()
         else:
