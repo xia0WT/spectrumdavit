@@ -138,7 +138,7 @@ class XrdPredict(object):
             self._logger.info(f"The {j} similar structure index is {i[0]}, score is {i[1]}")
 
         for i,j in zip(dtwsc[:3],("1st", "2nd", "3rd")):
-            self._logger.info(f"The {j} similar structure index according DTW is {i[0]},  score is {i[1]}")
+            self._logger.info(f"The {j} similar structure index according DTW is {i[0]},  score is {i[1]:.2f}, similarity s {i[2]:2f} %")
 
     @torch.no_grad()
     def _predict(self, peaks, model, top_k):
@@ -171,7 +171,9 @@ class XrdPredict(object):
         if self.dtwdetector:
             profiled = self.profile.pseudo_voigt(pattern.x, pattern.y)
             _dtw_score = self.dtwdetector(profiled)
-            self.dtw_score.append((index, _dtw_score))
+            _similarity = self._similarity_calculator(self.peak[0].shape[0], _dtw_score)
+            
+            self.dtw_score.append((index, _dtw_score, _similarity *100))
             self._logger.info(f"Structure index: {index}, formula: {formula}, DTW score: {_dtw_score}")
         if self.sgdector:
             _sgd_score = self.sgdector(pattern)
@@ -183,7 +185,11 @@ class XrdPredict(object):
         fig.savefig(os.path.join(pic_save_dir, f"{formula}--{index}.png"), dpi = 300)
         structure.to(os.path.join(pic_save_dir, f"{formula}--{index}.cif"), fmt = "cif")
         
-        
+    def _similarity_calculator(self, peak_num, cost):
+        gamma = - ( peak_num )/ np.log(0.9) # 0.9
+        return np.exp( - cost ** 2 / ( 200 * gamma ) )  #exponential similarity, 200 is standard c-DTW score
+
+
 class SGDetector(object):
     def __init__(self, x, y, window_length, poly_order, deriv):
         self.f = savgol_filter(y,
