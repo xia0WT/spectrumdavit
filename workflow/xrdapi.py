@@ -12,6 +12,7 @@ import argparse
 import yaml
 import pickle
 import os
+import re
 
 from tslearn.metrics import dtw_path
 from pybaselines import Baseline
@@ -29,7 +30,7 @@ class XrdPredict(object):
                  model_config, #"../xrd_predict_unique/20250723_162449_SpectrumDaVit/args_config.yaml",  #yaml
                  model_save_dir, #"../xrd_predict_unique/20250723_162449_SpectrumDaVit/model_best.pth.tar",  #pth.tar,
                  xrd_type_file = "template/pxrd_unique_10_60_1256_remove_duplicate_label.pkl",
-                 structure_frame = "template/structure_frame_unique_10_60_1256_remove_duplicate_fingerprint.pkl",
+                 structure_frame = "template/structure_frame_unique_10_60_1256_remove_duplicate_fingerprint_electronegativity.pkl",
                  mace_model_paths = "../data/mace-omat-0-medium.model",
                  local_rank = 2,
                  predict_topk = 3,
@@ -52,7 +53,7 @@ class XrdPredict(object):
         self.predict_topk = predict_topk
         self.calculator = XRDCalculator(wavelength='CuKa')
         
-
+        self.ep_fingerprint = bool(re.search("electronegativity", structure_frame))   #use eletronegativity as fingerprint
         with open(structure_frame, "rb") as f:
             self.frame = pickle.load(f)
 
@@ -114,7 +115,7 @@ class XrdPredict(object):
         self.dtw_score = []
         
     def get_structure(self, elements: list[str], **kwargs):
-        mg = MaceGenerator(frame = self.frame, model_paths = self.mace_model_paths, logger = self._logger)
+        mg = MaceGenerator(frame = self.frame, ep_fingerprint= self.ep_fingerprint, model_paths = self.mace_model_paths, logger = self._logger)
         crystal = []
         indices = self._predict(self.peak, self.model, self.predict_topk).tolist()
         if not isinstance(indices, list):
@@ -181,7 +182,7 @@ class XrdPredict(object):
             self._logger.info(f"Structure index: {index}, formula: {formula}, similarity score: {_sgd_score}")
         if not os.path.exists(pic_save_dir):
             os.mkdir(pic_save_dir)
-        plt.close(fig)
+        #plt.close(fig)
         fig.savefig(os.path.join(pic_save_dir, f"{formula}--{index}.png"), dpi = 300)
         structure.to(os.path.join(pic_save_dir, f"{formula}--{index}.cif"), fmt = "cif")
         

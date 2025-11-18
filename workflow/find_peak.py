@@ -37,10 +37,11 @@ class FindPeaks(object):
                             height=height,
                             prominence=prominence)
 
+        self.plot_xrd(two_theta, intensity, peaks)
         if plot:
-            self.plot_xrd(two_theta, intensity, peaks)
-            #self.fig.show()
-            plt.close(self.fig)
+            self.fig.show()
+        else:
+            plt.close(self.fig)  #plot = False
         if save_dir:
             self.fig.savefig(f"{save_dir}/result.png", dpi =300)
         return peaks

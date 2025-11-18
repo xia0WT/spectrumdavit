@@ -15,16 +15,23 @@ from scipy.spatial import distance
 class StructureGenerator(object):
     def __init__(self,
                  frame,
+                 ep_fingerprint,
                 ):
         self.frame = frame
-
+        self.ep_fingerprint = ep_fingerprint
     def from_elements(self, 
                       structure_type :str,
                       elements :list,
                       atoms_threshold = None,
                      ):
         element_num = len(elements)
-        f = np.array(sorted([Element(el).atomic_radius for el in elements], reverse= True))
+        if self.ep_fingerprint:
+            element_index = [Element(el).X for el in elements]
+        else:
+            element_index = [Element(el).atomic_radius for el in elements]
+            
+        f = np.array(sorted(element_index, reverse= True))   # use electronegativity
+        
         fingerprint = np.r_[f, np.var(f, keepdims = True),  np.mean(f, keepdims = True)]
         sub_types = self.frame.get(structure_type).keys()
         sub_types_keys = [ k for k in sub_types if len(re.sub(r'[0-9]+', '', k)) == element_num ]
@@ -69,8 +76,8 @@ class StructureGenerator(object):
 
     
 class MaceGenerator(StructureGenerator):
-    def __init__(self, frame, model_paths,logger = None):
-        super().__init__(frame)
+    def __init__(self, frame, ep_fingerprint, model_paths,logger = None):
+        super().__init__(frame, ep_fingerprint)
         self.mopt = MaceOpt(model_paths = model_paths)
         if logger:
             self._logger = logger.info
