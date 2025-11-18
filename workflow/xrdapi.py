@@ -182,7 +182,7 @@ class XrdPredict(object):
             self._logger.info(f"Structure index: {index}, formula: {formula}, similarity score: {_sgd_score}")
         if not os.path.exists(pic_save_dir):
             os.mkdir(pic_save_dir)
-        #plt.close(fig)
+        plt.close(fig)
         fig.savefig(os.path.join(pic_save_dir, f"{formula}--{index}.png"), dpi = 300)
         structure.to(os.path.join(pic_save_dir, f"{formula}--{index}.cif"), fmt = "cif")
         
