@@ -1,0 +1,19 @@
+2025-11-18 19:05:01,979 - Admin - INFO - ===========STARTING TOP 0 PREDICTION===========
+2025-11-18 19:05:03,318 - Admin - INFO - Starting Mn12O16
+2025-11-18 19:05:12,930 - Admin - INFO - Finish Mn12O16 geometry optimization in 22 steps with minimized force 0.000087
+2025-11-18 19:05:12,933 - Admin - INFO - Starting Mn16O12
+2025-11-18 19:05:20,955 - Admin - INFO - Finish Mn16O12 geometry optimization in 31 steps with minimized force 0.000166
+2025-11-18 19:05:20,957 - Admin - INFO - ===========STARTING TOP 1 PREDICTION===========
+2025-11-18 19:05:21,131 - Admin - INFO - Starting Mn4O4
+2025-11-18 19:05:22,008 - Admin - INFO - Finish Mn4O4 geometry optimization in 14 steps with minimized force 0.000162
+2025-11-18 19:05:22,010 - Admin - INFO - Starting Mn4O4
+2025-11-18 19:05:23,047 - Admin - INFO - Finish Mn4O4 geometry optimization in 16 steps with minimized force 0.000051
+2025-11-18 19:05:23,049 - Admin - INFO - ===========STARTING TOP 2 PREDICTION===========
+2025-11-18 19:05:25,874 - Admin - INFO - Structure index: 0, formula: Mn12O16, DTW score: 157.2523628687032
+2025-11-18 19:05:26,525 - Admin - INFO - Structure index: 1, formula: Mn16O12, DTW score: 545.3250580419403
+2025-11-18 19:05:27,069 - Admin - INFO - Structure index: 2, formula: Mn4O4, DTW score: 270.40384992102
+2025-11-18 19:05:27,611 - Admin - INFO - Structure index: 3, formula: Mn4O4, DTW score: 411.2534155381078
+2025-11-18 19:05:27,850 - Admin - INFO - ==============GROUND TRUTH SUMMARY==============
+2025-11-18 19:05:27,852 - Admin - INFO - The 1st similar structure index according DTW is 0,  score is 157.25, similarity s 46.473390 %
+2025-11-18 19:05:27,854 - Admin - INFO - The 2nd similar structure index according DTW is 2,  score is 270.40, similarity s 10.374530 %
+2025-11-18 19:05:27,855 - Admin - INFO - The 3rd similar structure index according DTW is 3,  score is 411.25, similarity s 0.529471 %
