@@ -43,7 +43,7 @@ class FindPeaks(object):
         else:
             plt.close(self.fig)  #plot = False
         if save_dir:
-            self.fig.savefig(f"{save_dir}/result.png", dpi =300)
+            self.fig.savefig(f"{save_dir}/peaks_tagging_result.png", dpi =300)
         return peaks
         
     def _peaks(self,
