@@ -6,7 +6,7 @@ from pymatgen.core import Structure
 
 from .mace_opt import MaceOpt
 
-from itertools import permutations
+import itertools
 
 import numpy as np
 from pymatgen.core.composition import Element
@@ -15,7 +15,8 @@ from scipy.spatial import distance
 class StructureGenerator(object):
     def __init__(self,
                  frame,
-                 ep_fingerprint,
+                 ep_fingerprint,  #Electronegativity as fingerprint
+
                 ):
         self.frame = frame
         self.ep_fingerprint = ep_fingerprint
@@ -30,14 +31,28 @@ class StructureGenerator(object):
         else:
             element_index = [Element(el).atomic_radius for el in elements]
             
-        f = np.array(sorted(element_index, reverse= True))   # use electronegativity
+        _f = np.array(sorted(element_index, reverse= True))   # use electronegativity
         
-        fingerprint = np.r_[f, np.var(f, keepdims = True),  np.mean(f, keepdims = True)]
+        #fingerprint = np.r_[f, np.var(f, keepdims = True),  np.mean(f, keepdims = True)]
         sub_types = self.frame.get(structure_type).keys()
         sub_types_keys = [ k for k in sub_types if len(re.sub(r'[0-9]+', '', k)) == element_num ]
+
+        
+        if len(sub_types_keys) == 0:
+            sub_types_keys = [ k for k in sub_types]
+            
         crystals = []
         for sub_types_key in sub_types_keys:
             sub_frame = self.frame[structure_type][sub_types_key]
+                        
+            padding = len(re.sub(r'[0-9]+', '', sub_types_key)) - element_num
+            if padding < 0:
+                continue
+            
+            f = np.pad(_f,(0,padding),"constant", constant_values = 0)
+            
+            fingerprint = np.r_[f, np.var(f, keepdims = True),  np.mean(f, keepdims = True)]
+
             type_indice = np.argmin([distance.cosine(k.get("fingerprint"), fingerprint) for k in sub_frame])
             strcuture_elements, wyckoff_symbols, wyckoff_sites, spacegroup, matrix, numion, _ = sub_frame[type_indice].values()
             _symbols = self._sub_site(elements, strcuture_elements)
@@ -69,9 +84,15 @@ class StructureGenerator(object):
         
         r = set(structure_elements)
         s = set(elements)
-        replacements = [dict(zip(r, p)) for p in permutations(s)]
-        res = [[i.get(char, char) for char in structure_elements] for i in replacements]
-        
+
+        #replacements = [dict(zip(r, p)) for p in permutations(s)]
+        #res = [[i.get(char, char) for char in structure_elements] for i in replacements]
+
+        combos = itertools.product(s, repeat=len(r))
+        replacements = [dict(zip(r, p)) for p in combos]
+        _res = [[i.get(char, char) for char in structure_elements] for i in replacements]
+        res = [r for r in _res if len(set(r) & s) == len(s)]
+
         return res
 
     
